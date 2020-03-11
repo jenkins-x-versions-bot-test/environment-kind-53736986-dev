@@ -1,20 +1,82 @@
+autoUpdate:
+  enabled: false
+  schedule: ""
 cluster:
+  chartRepository: http://bucketrepo/bucketrepo/charts/
+  clusterName: kind-53736986
+  environmentGitOwner: jenkins-x-versions-bot-test
+  environmentGitPublic: true
   gitKind: github
   gitName: github
+  gitPublic: true
   gitServer: https://github.com
   namespace: jx
+  provider: kind
+  registry: 10.1.0.4:5000
 environments:
-- key: dev
-- key: staging
-  remoteCluster: false
-- key: production
-  remoteCluster: false
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: dev
+  repository: environment-kind-53736986-dev
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: staging
+  repository: environment-kind-53736986-staging
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: production
+  repository: environment-kind-53736986-production
 gitops: true
 helmfile: true
+ingress:
+  domain: 10.1.0.4.nip.io
+  externalDNS: false
+  ignoreLoadBalancer: true
+  namespaceSubDomain: -jx.
+  serviceType: NodePort
+  tls:
+    email: ""
+    enabled: false
+    production: false
 kaniko: true
-repository: nexus
+repository: bucketrepo
 secretStorage: local
+storage:
+  backup:
+    enabled: false
+    url: ""
+  logs:
+    enabled: false
+    url: ""
+  reports:
+    enabled: false
+    url: ""
+  repository:
+    enabled: false
+    url: ""
+vault: {}
+velero:
+  schedule: ""
+  ttl: ""
 versionStream:
-  ref: master
+  ref: v1.0.390
   url: https://github.com/jenkins-x/jenkins-x-versions.git
 webhook: lighthouse
